@@ -1,0 +1,52 @@
+import api from '@/services';
+
+const state = {
+    data: {
+        jobs: [],
+        filters: []
+    }
+};
+
+const mutations = {
+    GET_JOBS_SUCCESS(state, data) {
+        state.data.jobs = data;
+    },
+    ADD_NEW_JOB_FILTER(state, filter) {
+        state.data.filters.push(filter);
+    },
+    REMOVE_JOB_FILTER(state, index) {
+        state.data.filters.splice(index, 1);
+    },
+    CLEAR_JOB_FILTERS(state) {
+        state.data.filters = [];
+    }
+};
+
+const actions = {
+    async getJobs({ commit }) {
+        const params = state.data.filters;
+        const response = await api.job.getJobs(params);
+        if (response && response.status === 200) {
+            commit('GET_JOBS_SUCCESS', response.data);
+        }
+        return response;
+    },
+    addJobFilter({ commit }, filter) {
+        if (!state.data.filters.find(e => e.value === filter.value)) {
+            commit('ADD_NEW_JOB_FILTER', filter);
+        }
+    },
+    removeJobFilter({ commit }, filterIdx) {
+        commit('REMOVE_JOB_FILTER', filterIdx);
+    },
+    clearJobFilters({ commit }, filter) {
+        commit('CLEAR_JOB_FILTERS');
+    }
+};
+
+export default {
+    namespaced: true,
+    state,
+    mutations,
+    actions
+};
