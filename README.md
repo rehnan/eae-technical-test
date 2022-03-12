@@ -4,9 +4,11 @@
 - DB (Postgres v13)
 - PHP
 
-# Clone project
-
-$ git clone 
+# Clone eae-technical-test project
+``` bash
+$ git clone https://github.com/rehnan/eae-technical-test.git
+$ cd eae-technical-test
+```
 
 # How to run the services through docker containers
 Steps to run the services through docker containers
@@ -18,12 +20,13 @@ Steps to run the services through docker containers
 
 ### Back-end setup
 ``` bash
-back-end$ mv .env.example back-end
+$ cd back-end
+back-end$ mv .env.example .env
 back-end$ composer install
 ```
 ### Front-end setup
 ``` bash
-front-end$ cd /front-end
+$ cd front-end
 front-end$ yarn OR npm install
 ```
 ### Docker services setup
@@ -42,7 +45,7 @@ $ docker-compose up (or docker-compose up -d to run in daemon mode)
 ```
 ### Run back-end service migrations
 ``` bash
-$ docker exec -it eae-technical-test_api_1 php artisan migrate
+$ docker exec -it eae-technical-test_api_1 php artisan migrate:refresh
 ```
 ### Run back-end service seeds
 ``` bash
@@ -56,7 +59,7 @@ $ docker exec -it eae-technical-test_api_1 php ./vendor/phpunit/phpunit/phpunit
 Steps to run the services locally
 
 ## Dependencies:
-- Npm v6.14.13
+- Npm v6.14.13 / Yarn v1.22.5
 - Node v14.17.0 - Obs: you can to use nvm to control it (:
 - Composer v2.0.2
 - PHP (7.4v / 7.3v)
@@ -76,9 +79,9 @@ front-end$ npm run serve -- --port 5003
 ```
 # Check available service addresses
 ``` bash
+- Front-end service available in: http://localhost:5003
 - Back-end service available in: http://localhost:5001
 - DB service available in: http://localhost:5002
-- Front-end service available in: http://localhost:5003
 ```
 # Back-end endpoints:
 ``` bash
