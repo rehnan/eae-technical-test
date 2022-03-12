@@ -1,0 +1,6 @@
+/.idea
+
+# Ignore back-end rules
+vendor
+.env
+.phpunit.result.cache
